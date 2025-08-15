@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Seating Arrangement System - Live Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Exam Seating Arrangement System</h1>
+            <p class="subtitle">Smart Algorithm Demo - Prevents Same Department Adjacency</p>
+        </header>
+
+        <!-- Student Management Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Student Management</h2>
+                <button class="btn btn--outline btn--sm" id="toggleAddForm">+ Add Student</button>
+            </div>
+
+            <!-- Add Student Form (Hidden by default) -->
+            <div class="card add-student-form hidden" id="addStudentForm">
+                <div class="card__body">
+                    <h3>Add New Student</h3>
+                    <form id="studentForm" class="student-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="rollNumber">Roll Number</label>
+                                <input type="text" id="rollNumber" class="form-control" placeholder="e.g., 2022CSE005" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="studentName">Full Name</label>
+                                <input type="text" id="studentName" class="form-control" placeholder="e.g., John Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="department">Department</label>
+                                <select id="department" class="form-control" required>
+                                    <option value="" disabled selected>Select Department</option>
+                                    <option value="CSE">CSE - Computer Science Engineering</option>
+                                    <option value="ECE">ECE - Electronics & Communication</option>
+                                    <option value="MECH">MECH - Mechanical Engineering</option>
+                                    <option value="CIVIL">CIVIL - Civil Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-actions">
+                                <button type="submit" class="btn btn--primary">Add Student</button>
+                                <button type="button" class="btn btn--outline" id="cancelAdd">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Student List -->
+            <div class="card">
+                <div class="card__body">
+                    <div class="table-controls">
+                        <h3>Student List (<span id="studentCount">0</span> students)</h3>
+                        <div class="filters">
+                            <select id="departmentFilter" class="form-control filter-select">
+                                <option value="">All Departments</option>
+                                <option value="CSE">CSE</option>
+                                <option value="ECE">ECE</option>
+                                <option value="MECH">MECH</option>
+                                <option value="CIVIL">CIVIL</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Roll Number</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hall Information Section -->
+        <section class="section">
+            <h2>Exam Halls Information</h2>
+            <div class="halls-grid" id="hallsGrid">
+            </div>
+        </section>
+
+        <!-- Seating Generation Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Seating Arrangement Generation</h2>
+                <button class="btn btn--primary btn--lg" id="generateSeating">
+                    <span id="generateText">Generate Seating Arrangement</span>
+                    <span id="generateSpinner" class="hidden">Generating...</span>
+                </button>
+            </div>
+
+            <!-- Algorithm Explanation -->
+            <div class="card algorithm-card">
+                <div class="card__body">
+                    <h3>Smart Seating Algorithm</h3>
+                    <div class="algorithm-steps" id="algorithmSteps">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generation Progress -->
+            <div class="card progress-card hidden" id="progressCard">
+                <div class="card__body">
+                    <h3>Generation Progress</h3>
+                    <div class="progress-steps" id="progressSteps">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="section hidden" id="resultsSection">
+            <h2>Seating Arrangement Results</h2>
+            
+            <!-- Statistics -->
+            <div class="stats-grid" id="statsGrid">
+            </div>
+
+            <!-- Hall-wise Seating -->
+            <div id="seatingResults">
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn--outline" id="resetArrangement">Reset & Try Again</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
